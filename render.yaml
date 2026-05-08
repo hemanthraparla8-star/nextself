@@ -13,6 +13,12 @@ services:
         value: 0.0.0.0
       - key: NEXTSELF_USE_MOCK_AI
         value: false
+      - key: AI_PROVIDER
+        value: gemini
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: GEMINI_API_KEY
+        sync: false
       - key: OPENAI_MODEL
         value: gpt-5.4-mini
       - key: OPENAI_API_KEY

@@ -164,7 +164,12 @@ const glowupAnalysis = [
 function withMeta(payload, mode) {
   return {
     mode,
-    model: mode === 'mock' ? 'mock' : process.env.OPENAI_MODEL,
+    model:
+      mode === 'mock'
+        ? 'mock'
+        : mode === 'gemini'
+          ? process.env.GEMINI_MODEL
+          : process.env.OPENAI_MODEL,
     analyzedAt: new Date().toISOString(),
     result: payload,
   };

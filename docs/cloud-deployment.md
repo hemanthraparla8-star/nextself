@@ -12,7 +12,9 @@ Required environment variables:
 NODE_ENV=production
 AI_SERVER_HOST=0.0.0.0
 OPENAI_API_KEY=your_backend_only_key
-OPENAI_MODEL=gpt-5.4-mini
+AI_PROVIDER=gemini
+GEMINI_API_KEY=your_google_ai_studio_key
+GEMINI_MODEL=gemini-2.0-flash
 NEXTSELF_USE_MOCK_AI=false
 CORS_ORIGIN=*
 RATE_LIMIT_WINDOW_MS=60000
@@ -27,7 +29,7 @@ This repo includes `render.yaml`.
 
 1. Push the repo to GitHub.
 2. Create a new Render Blueprint from the repo.
-3. Add `OPENAI_API_KEY` in Render's environment settings.
+3. Add `GEMINI_API_KEY` in Render's environment settings.
 4. Deploy.
 5. Confirm:
 
@@ -42,6 +44,8 @@ The response should show:
 ```
 
 If it says `mock`, either `OPENAI_API_KEY` is missing or `NEXTSELF_USE_MOCK_AI=true`.
+
+If it says `mock`, either the selected provider key is missing or `NEXTSELF_USE_MOCK_AI=true`.
 
 ## Docker Hosts
 

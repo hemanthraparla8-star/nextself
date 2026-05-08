@@ -41,15 +41,27 @@ This keeps the app usable during development.
 
 ## Real OpenAI Mode
 
-Create `.env` from `.env.example`, then set:
+Create `.env` from `.env.example`.
+
+For Gemini free-tier testing, set:
 
 ```env
+AI_PROVIDER=gemini
+GEMINI_API_KEY=your_google_ai_studio_key
+GEMINI_MODEL=gemini-2.0-flash
+NEXTSELF_USE_MOCK_AI=false
+```
+
+For OpenAI, set:
+
+```env
+AI_PROVIDER=openai
 OPENAI_API_KEY=your_backend_only_key
 OPENAI_MODEL=gpt-5.4-mini
 NEXTSELF_USE_MOCK_AI=false
 ```
 
-Never put `OPENAI_API_KEY` in Expo public variables or client code.
+Never put provider API keys in Expo public variables or client code.
 
 For phone testing, set the app API URL to your computer's LAN address:
 
