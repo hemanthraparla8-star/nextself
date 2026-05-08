@@ -229,7 +229,7 @@ export default function ScanScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <Animated.View style={[styles.header, { opacity: fadeAnim }]}>
@@ -407,9 +407,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 12,
+    borderRadius: 16,
     paddingHorizontal: 12,
     paddingVertical: 8,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.14,
+    shadowRadius: 16,
+    elevation: 3,
   },
   scansNum: {
     fontSize: 18,
@@ -431,7 +436,7 @@ const styles = StyleSheet.create({
   modeTab: {
     paddingHorizontal: 14,
     paddingVertical: 7,
-    borderRadius: 20,
+    borderRadius: 18,
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
@@ -456,7 +461,7 @@ const styles = StyleSheet.create({
   viewfinder: {
     width: width - 80,
     height: width - 80,
-    borderRadius: 24,
+    borderRadius: 28,
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
@@ -465,6 +470,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     marginBottom: 20,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 18 },
+    shadowOpacity: 0.18,
+    shadowRadius: 26,
+    elevation: 5,
   },
   previewImage: {
     ...StyleSheet.absoluteFillObject,
@@ -486,7 +496,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: colors.surfaceLight,
+    backgroundColor: '#F0E8FF',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 12,
@@ -601,11 +611,17 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   resultsHeader: {
-    borderRadius: 22,
+    borderRadius: 24,
     padding: 20,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: 'rgba(0,217,163,0.2)',
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 14 },
+    shadowOpacity: 0.14,
+    shadowRadius: 20,
+    elevation: 4,
   },
   resultsTitle: {
     fontSize: 18,
@@ -649,7 +665,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     padding: 14,
     backgroundColor: colors.surfaceLight,
-    borderRadius: 14,
+    borderRadius: 18,
     borderWidth: 1,
     borderColor: colors.border,
   },

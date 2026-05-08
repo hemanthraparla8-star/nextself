@@ -27,7 +27,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
 
   return (
     <View style={[styles.tabBarWrapper, { paddingBottom: insets.bottom || 12 }]}>
-      <BlurView intensity={60} tint="dark" style={StyleSheet.absoluteFill} />
+      <BlurView intensity={75} tint="light" style={StyleSheet.absoluteFill} />
       <View style={styles.borderTop} />
       <View style={styles.tabBarInner}>
         {state.routes.map((route, index) => {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(14, 14, 16, 0.85)',
+    backgroundColor: 'rgba(255, 255, 255, 0.86)',
   },
   borderTop: {
     height: 1,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   iconWrapActive: {
-    backgroundColor: colors.primaryGlow,
+    backgroundColor: '#EFE7FF',
   },
   tabLabel: {
     fontSize: 9,

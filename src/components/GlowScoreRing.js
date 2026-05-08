@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   scoreNum: {
-    fontSize: 52,
+    fontSize: 50,
     fontWeight: '800',
     color: colors.textPrimary,
     letterSpacing: -2,
@@ -129,6 +129,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 3,
     borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(178,139,255,0.25)',
   },
   badgeText: {
     fontSize: 11,

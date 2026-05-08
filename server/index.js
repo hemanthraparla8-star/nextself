@@ -11,6 +11,7 @@ const { analyzeImageWithGemini, getGeminiModel } = require('./geminiClient');
 const { glowupPrompt, skincarePrompt } = require('./prompts');
 const { glowupAnalysis, skincareAnalysis, withMeta } = require('./mockResults');
 const { imageInputFromRequest } = require('./imageInput');
+const { matchProductsForAnalysis } = require('./productCatalog');
 
 const app = express();
 const upload = multer({
@@ -66,6 +67,13 @@ async function analyzeWithConfiguredProvider({ imageData, prompt }) {
   throw new Error(`Unsupported AI_PROVIDER: ${provider()}`);
 }
 
+function withProductMatches(analysis) {
+  return {
+    ...analysis,
+    productRecommendations: matchProductsForAnalysis(analysis),
+  };
+}
+
 app.post('/api/analyze/glowup', scanLimiter, upload.single('image'), async (req, res, next) => {
   try {
     const imageData = imageInputFromRequest(req);
@@ -95,12 +103,12 @@ app.post('/api/analyze/skincare', scanLimiter, upload.single('image'), async (re
     }
 
     if (useMock()) {
-      res.json(withMeta(skincareAnalysis, 'mock'));
+      res.json(withMeta(withProductMatches(skincareAnalysis), 'mock'));
       return;
     }
 
     const result = await analyzeWithConfiguredProvider({ imageData, prompt: skincarePrompt });
-    res.json(withMeta(result, provider()));
+    res.json(withMeta(withProductMatches(result), provider()));
   } catch (error) {
     next(error);
   }

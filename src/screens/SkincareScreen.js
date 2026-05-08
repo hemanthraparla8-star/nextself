@@ -4,6 +4,7 @@ import {
   Animated,
   Dimensions,
   Image,
+  Linking,
   Platform,
   ScrollView,
   StatusBar,
@@ -138,12 +139,23 @@ function RoutineStep({ item, index }) {
 }
 
 function ProductRecommendation({ item }) {
+  const openProductLink = async (url) => {
+    if (!url) return;
+
+    try {
+      await Linking.openURL(url);
+    } catch (_) {
+      Alert.alert('Link unavailable', 'We could not open this product link right now.');
+    }
+  };
+
   return (
     <View style={styles.productCard}>
       <View style={styles.productTop}>
         <View>
           <Text style={styles.productCategory}>{item.category}</Text>
-          <Text style={styles.productType}>{item.productType}</Text>
+          <Text style={styles.productBrand}>{item.brand}</Text>
+          <Text style={styles.productType}>{item.name || item.productType}</Text>
         </View>
         <View style={styles.matchBadge}>
           <Text style={styles.matchText}>{item.match}</Text>
@@ -160,6 +172,28 @@ function ProductRecommendation({ item }) {
       {item.avoid?.length ? (
         <Text style={styles.avoidText}>Avoid: {item.avoid.join(', ')}</Text>
       ) : null}
+      <View style={styles.productLinkRow}>
+        {item.officialUrl ? (
+          <TouchableOpacity
+            style={styles.productLink}
+            activeOpacity={0.75}
+            onPress={() => openProductLink(item.officialUrl)}
+          >
+            <Ionicons name="open-outline" size={14} color={colors.primaryDark} />
+            <Text style={styles.productLinkText}>Official</Text>
+          </TouchableOpacity>
+        ) : null}
+        {item.amazonUrl ? (
+          <TouchableOpacity
+            style={styles.productLink}
+            activeOpacity={0.75}
+            onPress={() => openProductLink(item.amazonUrl)}
+          >
+            <Ionicons name="bag-outline" size={14} color={colors.primaryDark} />
+            <Text style={styles.productLinkText}>Amazon search</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
     </View>
   );
 }
@@ -314,7 +348,7 @@ export default function SkincareScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <View>
@@ -329,7 +363,7 @@ export default function SkincareScreen() {
 
         <View style={styles.heroPanel}>
           <LinearGradient
-            colors={['rgba(108,92,231,0.14)', 'rgba(0,217,163,0.06)', 'rgba(255,255,255,0.02)']}
+            colors={['rgba(255,255,255,0.98)', 'rgba(244,237,255,0.9)', 'rgba(229,255,246,0.72)']}
             style={StyleSheet.absoluteFill}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
@@ -383,7 +417,7 @@ export default function SkincareScreen() {
                   <Ionicons name="globe-outline" size={20} color={colors.textSecondary} />
                 </TouchableOpacity>
                 <GradientButton
-                  label="Capture Face Scan"
+                  label="Capture Scan"
                   icon="📷"
                   gradient={[colors.primary, colors.accent]}
                   onPress={handleCapture}
@@ -474,7 +508,7 @@ export default function SkincareScreen() {
 
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Product Matches</Text>
-              <Text style={styles.sectionHint}>Ingredient-first</Text>
+              <Text style={styles.sectionHint}>Catalog matched</Text>
             </View>
             {analysis.productRecommendations?.map((item) => (
               <ProductRecommendation key={item.id} item={item} />
@@ -552,6 +586,11 @@ const styles = StyleSheet.create({
     padding: 16,
     overflow: 'hidden',
     marginBottom: 16,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 16 },
+    shadowOpacity: 0.16,
+    shadowRadius: 24,
+    elevation: 5,
   },
   scanHeader: {
     flexDirection: 'row',
@@ -578,9 +617,9 @@ const styles = StyleSheet.create({
     maxHeight: VIEWFINDER_SIZE,
     borderRadius: 22,
     overflow: 'hidden',
-    backgroundColor: '#080A0D',
+    backgroundColor: '#F8F6FB',
     borderWidth: 1,
-    borderColor: '#2D4A4E',
+    borderColor: colors.border,
     position: 'relative',
     alignSelf: 'center',
   },
@@ -593,7 +632,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 28,
     gap: 10,
-    backgroundColor: '#101216',
+    backgroundColor: '#FBF8FC',
   },
   cameraFallbackTitle: {
     fontSize: 16,
@@ -708,7 +747,7 @@ const styles = StyleSheet.create({
   scanStatsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: 'rgba(255,255,255,0.76)',
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: 16,
@@ -759,7 +798,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    borderRadius: 16,
+    borderRadius: 18,
     backgroundColor: colors.accentGlow,
     borderWidth: 1,
     borderColor: 'rgba(0,217,163,0.25)',
@@ -798,6 +837,11 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     padding: 16,
     marginBottom: 18,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.12,
+    shadowRadius: 18,
+    elevation: 3,
   },
   metricRow: {
     marginBottom: 14,
@@ -835,6 +879,11 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 14,
     marginBottom: 10,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
+    elevation: 2,
   },
   concernIcon: {
     width: 38,
@@ -879,6 +928,11 @@ const styles = StyleSheet.create({
     padding: 16,
     marginTop: 8,
     marginBottom: 18,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.12,
+    shadowRadius: 20,
+    elevation: 3,
   },
   routineHeader: {
     flexDirection: 'row',
@@ -977,6 +1031,11 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 14,
     marginBottom: 10,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
+    elevation: 2,
   },
   productTop: {
     flexDirection: 'row',
@@ -991,6 +1050,12 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
     textTransform: 'uppercase',
     marginBottom: 3,
+  },
+  productBrand: {
+    color: colors.textMuted,
+    fontSize: 11,
+    fontWeight: '800',
+    marginBottom: 2,
   },
   productType: {
     color: colors.textPrimary,
@@ -1037,6 +1102,26 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 11,
     lineHeight: 15,
+  },
+  productLinkRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 10,
+  },
+  productLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#F0E8FF',
+    borderRadius: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+  },
+  productLinkText: {
+    color: colors.primaryDark,
+    fontSize: 11,
+    fontWeight: '900',
   },
   disclaimerText: {
     flex: 1,

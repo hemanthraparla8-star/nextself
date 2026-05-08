@@ -9,7 +9,7 @@ export default function StatCard({ icon, label, value, unit, color = colors.prim
   return (
     <View style={styles.card}>
       <LinearGradient
-        colors={['rgba(255,255,255,0.06)', 'rgba(255,255,255,0.02)']}
+        colors={['rgba(255,255,255,1)', 'rgba(247,243,251,0.92)']}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -47,6 +47,11 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     overflow: 'hidden',
     minHeight: 108,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.16,
+    shadowRadius: 18,
+    elevation: 4,
   },
   gradient: {
     ...StyleSheet.absoluteFillObject,
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
   iconWrap: {
     width: 34,
     height: 34,
-    borderRadius: 10,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,

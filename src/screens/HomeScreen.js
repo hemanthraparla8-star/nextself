@@ -55,7 +55,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <ScrollView
         style={styles.scroll}
         showsVerticalScrollIndicator={false}
@@ -73,7 +73,7 @@ export default function HomeScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={[colors.primary, colors.accent]}
+              colors={['#C5A5FF', '#29D0A0']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.premiumGrad}
@@ -87,7 +87,7 @@ export default function HomeScreen() {
         {/* Streak Banner */}
         <Animated.View style={[styles.streakBanner, { opacity: headerFade }]}>
           <LinearGradient
-            colors={['rgba(108,92,231,0.15)', 'rgba(0,217,163,0.08)']}
+            colors={['rgba(255,255,255,0.96)', 'rgba(239,230,255,0.84)']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.streakGrad}
@@ -112,14 +112,14 @@ export default function HomeScreen() {
           style={[styles.ringSection, { opacity: headerFade, transform: [{ translateY: contentSlide }] }]}
         >
           <LinearGradient
-            colors={['rgba(108,92,231,0.08)', 'rgba(0,217,163,0.04)']}
+            colors={['rgba(255,255,255,1)', 'rgba(244,237,255,0.86)']}
             style={styles.ringCard}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
           >
             <View style={styles.ringGlow} />
             <Text style={styles.sectionLabel}>TODAY'S GLOW SCORE</Text>
-            <GlowScoreRing score={user.glowScore} size={188} />
+            <GlowScoreRing score={user.glowScore} size={182} />
             <Text style={styles.ringSubtitle}>Your NextSelf journey today</Text>
           </LinearGradient>
         </Animated.View>
@@ -184,7 +184,7 @@ export default function HomeScreen() {
               activeOpacity={0.85}
             >
               <LinearGradient
-                colors={['rgba(255,255,255,0.06)', 'rgba(255,255,255,0.02)']}
+                colors={['rgba(255,255,255,1)', 'rgba(248,244,252,0.92)']}
                 style={styles.challengeCard}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     paddingTop: 16,
-    marginBottom: 16,
+    marginBottom: 18,
   },
   headerLeft: {},
   greeting: {
@@ -249,16 +249,21 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   userName: {
-    fontSize: 26,
+    fontSize: 27,
     fontWeight: '800',
     color: colors.textPrimary,
     letterSpacing: -0.5,
     marginTop: 2,
   },
   premiumBtn: {
-    borderRadius: 20,
+    borderRadius: 22,
     overflow: 'hidden',
     marginTop: 4,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.22,
+    shadowRadius: 15,
+    elevation: 4,
   },
   premiumGrad: {
     flexDirection: 'row',
@@ -275,11 +280,16 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   streakBanner: {
-    borderRadius: 16,
+    borderRadius: 22,
     overflow: 'hidden',
     marginBottom: 16,
     borderWidth: 1,
     borderColor: colors.border,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.14,
+    shadowRadius: 20,
+    elevation: 3,
   },
   streakGrad: {
     flexDirection: 'row',
@@ -287,7 +297,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    borderRadius: 16,
+    borderRadius: 22,
   },
   streakMsg: {
     fontSize: 14,
@@ -300,7 +310,7 @@ const styles = StyleSheet.create({
   streakNum: {
     fontSize: 22,
     fontWeight: '800',
-    color: colors.primary,
+    color: colors.primaryDark,
     letterSpacing: -0.5,
   },
   streakDay: {
@@ -315,15 +325,21 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   ringCard: {
-    borderRadius: 28,
+    borderRadius: 26,
     alignItems: 'center',
-    paddingTop: 24,
-    paddingBottom: 22,
+    paddingTop: 26,
+    paddingBottom: 24,
     paddingHorizontal: 20,
     borderWidth: 1,
     borderColor: colors.border,
     overflow: 'hidden',
     position: 'relative',
+    backgroundColor: colors.surface,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 16 },
+    shadowOpacity: 0.18,
+    shadowRadius: 24,
+    elevation: 5,
   },
   ringGlow: {
     position: 'absolute',
@@ -332,7 +348,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 100,
     backgroundColor: colors.primaryGlow,
-    opacity: 0.4,
+    opacity: 0.85,
   },
   sectionLabel: {
     fontSize: 10,
@@ -385,6 +401,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     gap: 12,
     overflow: 'hidden',
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.14,
+    shadowRadius: 18,
+    elevation: 3,
   },
   challengeIcon: {
     fontSize: 28,

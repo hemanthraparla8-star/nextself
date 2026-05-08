@@ -37,7 +37,7 @@ export default function AIResultCard({ result, index = 0 }) {
       ]}
     >
       <LinearGradient
-        colors={['rgba(255,255,255,0.05)', 'rgba(255,255,255,0.01)']}
+        colors={['rgba(255,255,255,1)', 'rgba(248,244,252,0.92)']}
         style={StyleSheet.absoluteFill}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
     padding: 18,
     marginBottom: 12,
     overflow: 'hidden',
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.14,
+    shadowRadius: 18,
+    elevation: 3,
   },
   header: {
     flexDirection: 'row',

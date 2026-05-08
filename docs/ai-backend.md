@@ -29,6 +29,8 @@ Both endpoints accept either:
 - JSON: `{ "imageUrl": "https://..." }`
 - Multipart form data: `image=<uploaded image file>`
 
+Skincare results are post-processed against `server/productCatalog.js` so the app can show specific catalog-backed products instead of letting the model invent brand names or shopping links.
+
 ## Mock Mode
 
 By default, the backend runs in mock mode when no OpenAI API key is present.
