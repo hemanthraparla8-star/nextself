@@ -11,14 +11,13 @@ Required environment variables:
 ```env
 NODE_ENV=production
 AI_SERVER_HOST=0.0.0.0
-OPENAI_API_KEY=your_backend_only_key
 AI_PROVIDER=gemini
 GEMINI_API_KEY=your_google_ai_studio_key
 GEMINI_MODEL=gemini-2.0-flash
 NEXTSELF_USE_MOCK_AI=false
 CORS_ORIGIN=*
 RATE_LIMIT_WINDOW_MS=60000
-RATE_LIMIT_MAX=20
+RATE_LIMIT_MAX=10
 ```
 
 Most cloud hosts provide `PORT` automatically. The backend reads `PORT` first, then falls back to `AI_SERVER_PORT`.
@@ -40,12 +39,15 @@ curl https://your-backend-url.onrender.com/health
 The response should show:
 
 ```json
-{ "ok": true, "mode": "openai" }
+{
+  "ok": true,
+  "aiMode": "live",
+  "provider": "gemini",
+  "model": "gemini-2.0-flash"
+}
 ```
 
-If it says `mock`, either `OPENAI_API_KEY` is missing or `NEXTSELF_USE_MOCK_AI=true`.
-
-If it says `mock`, either the selected provider key is missing or `NEXTSELF_USE_MOCK_AI=true`.
+If it says `"aiMode": "mock"`, either `GEMINI_API_KEY` is missing or `NEXTSELF_USE_MOCK_AI=true`.
 
 ## Docker Hosts
 
@@ -75,7 +77,7 @@ Then build the app. Expo public env values are bundled at build time, so changin
 Before public launch:
 
 - Use HTTPS only.
-- Keep `OPENAI_API_KEY` backend-only.
+- Keep `GEMINI_API_KEY` backend-only.
 - Add user accounts or device auth before paid launch.
 - Add stronger per-user rate limits.
 - Add request logging without storing raw face images.

@@ -41,11 +41,16 @@ app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
 app.use(express.json({ limit: '12mb' }));
 
 app.get('/health', (_req, res) => {
+  const activeProvider = useMock() ? 'mock' : provider();
   res.json({
     ok: true,
-    mode: useMock() ? 'mock' : 'openai',
-    provider: useMock() ? 'mock' : provider(),
+    aiMode: useMock() ? 'mock' : 'live',
+    provider: activeProvider,
     model: useMock() ? 'mock' : provider() === 'openai' ? getModel() : getGeminiModel(),
+    limits: {
+      windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS || 60_000),
+      maxRequests: Number(process.env.RATE_LIMIT_MAX || 20),
+    },
   });
 });
 

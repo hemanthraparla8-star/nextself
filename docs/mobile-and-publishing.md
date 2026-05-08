@@ -8,7 +8,7 @@ Do not put `OPENAI_API_KEY` inside the Expo app. Anything shipped to a phone can
 
 1. Phone app captures or uploads an image.
 2. Phone app sends the image to your backend over HTTPS.
-3. Backend calls OpenAI with `OPENAI_API_KEY`.
+3. Backend calls Gemini with `GEMINI_API_KEY`.
 4. Backend returns only the structured analysis JSON the app needs.
 
 ## Development Phone Testing
@@ -36,7 +36,7 @@ EXPO_PUBLIC_AI_API_URL=http://192.168.x.x:3001
 Before App Store / Play Store release:
 
 - Deploy `server/index.js` to a backend host.
-- Put `OPENAI_API_KEY` only in the backend environment.
+- Put `GEMINI_API_KEY` only in the backend environment.
 - Use HTTPS only.
 - Set `EXPO_PUBLIC_AI_API_URL=https://api.yourdomain.com` before building the production app.
 - Add authentication before allowing paid/production usage.

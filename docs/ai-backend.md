@@ -52,6 +52,16 @@ GEMINI_MODEL=gemini-2.0-flash
 NEXTSELF_USE_MOCK_AI=false
 ```
 
+Health should show:
+
+```json
+{
+  "ok": true,
+  "aiMode": "live",
+  "provider": "gemini"
+}
+```
+
 For OpenAI, set:
 
 ```env

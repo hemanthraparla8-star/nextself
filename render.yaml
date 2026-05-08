@@ -2,7 +2,7 @@ services:
   - type: web
     name: nextself-ai-backend
     env: node
-    plan: starter
+    plan: free
     buildCommand: npm install
     startCommand: npm run server
     healthCheckPath: /health
@@ -28,4 +28,4 @@ services:
       - key: RATE_LIMIT_WINDOW_MS
         value: "60000"
       - key: RATE_LIMIT_MAX
-        value: "20"
+        value: "10"
