@@ -36,3 +36,18 @@ EXPO_PUBLIC_AI_API_URL=https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/ai
 ## Notes
 
 Firebase Functions may still require a billing-enabled Firebase project for deployment, even when usage stays inside the free tier. The Gemini key should stay in Firebase secrets only.
+
+## Firebase AI Logic Client Option
+
+If you want to stay on the Spark plan during early testing, use Firebase AI Logic instead of Cloud Functions.
+
+1. In Firebase Console, open **AI services > Firebase AI Logic**.
+2. Choose the **Gemini Developer API** provider.
+3. Finish the setup wizard for the `nextself-93b1a` Web app.
+4. In the Expo `.env` file, switch:
+
+```bash
+EXPO_PUBLIC_AI_PROVIDER=firebase
+```
+
+The Firebase Web config is already wired through `src/config/firebase.js`. Firebase config values are client identifiers, not private Gemini secrets, but production usage should still enable Firebase App Check and conservative per-user rate limits.
