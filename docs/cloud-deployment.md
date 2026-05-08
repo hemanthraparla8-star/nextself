@@ -67,7 +67,7 @@ Deploy the same image to Fly.io, Railway, Google Cloud Run, AWS App Runner, Azur
 For production builds, set the public app API URL to your deployed HTTPS backend:
 
 ```env
-EXPO_PUBLIC_AI_API_URL=https://your-backend-domain.com
+EXPO_PUBLIC_AI_API_URL=https://nextself-ai-backend.onrender.com
 ```
 
 Then build the app. Expo public env values are bundled at build time, so changing this after a production build requires a new build or update.

@@ -43,6 +43,25 @@ function extractJsonText(result) {
   return parts.map((part) => part.text || '').join('\n').trim();
 }
 
+function parseJsonText(text) {
+  const cleaned = text
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/```$/i, '')
+    .trim();
+
+  try {
+    return JSON.parse(cleaned);
+  } catch (_) {
+    const start = cleaned.search(/[\[{]/);
+    const end = Math.max(cleaned.lastIndexOf('}'), cleaned.lastIndexOf(']'));
+    if (start >= 0 && end > start) {
+      return JSON.parse(cleaned.slice(start, end + 1));
+    }
+    throw new Error(`Gemini returned non-JSON text: ${cleaned.slice(0, 240)}`);
+  }
+}
+
 async function analyzeImageWithGemini({ imageData, prompt }) {
   if (!process.env.GEMINI_API_KEY) return null;
 
@@ -72,7 +91,12 @@ async function analyzeImageWithGemini({ imageData, prompt }) {
   }
 
   const result = await response.json();
-  return JSON.parse(extractJsonText(result));
+  const text = extractJsonText(result);
+  if (!text) {
+    throw new Error(`Gemini returned no text: ${JSON.stringify(result).slice(0, 500)}`);
+  }
+
+  return parseJsonText(text);
 }
 
 module.exports = {

@@ -29,3 +29,5 @@ services:
         value: "60000"
       - key: RATE_LIMIT_MAX
         value: "10"
+      - key: EXPOSE_ERROR_DETAILS
+        value: "false"

@@ -1,4 +1,4 @@
-const DEFAULT_API_URL = 'http://localhost:3001';
+const DEFAULT_API_URL = 'https://nextself-ai-backend.onrender.com';
 const REQUEST_TIMEOUT_MS = 30000;
 
 export function getAiApiUrl() {

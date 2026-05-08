@@ -110,7 +110,8 @@ app.use((error, _req, res, _next) => {
   console.error(error);
   res.status(500).json({
     error: 'analysis_failed',
-    message: process.env.NODE_ENV === 'production' ? 'Analysis failed' : error.message,
+    message: 'Analysis failed',
+    detail: process.env.EXPOSE_ERROR_DETAILS === 'true' ? error.message : undefined,
   });
 });
 
