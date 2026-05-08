@@ -1,0 +1,30 @@
+export const colors = {
+  background: '#0E0E10',
+  surface: '#16161A',
+  surfaceLight: '#1E1E24',
+  surfaceGlass: 'rgba(255, 255, 255, 0.05)',
+  primary: '#6C5CE7',
+  primaryLight: '#8B7CF8',
+  primaryDark: '#5A4BC7',
+  primaryGlow: 'rgba(108, 92, 231, 0.25)',
+  accent: '#00D9A3',
+  accentDark: '#00B589',
+  accentGlow: 'rgba(0, 217, 163, 0.2)',
+  warning: '#FFB020',
+  warningGlow: 'rgba(255, 176, 32, 0.2)',
+  error: '#FF4757',
+  textPrimary: '#FFFFFF',
+  textSecondary: '#A0A0A0',
+  textMuted: '#505058',
+  border: '#2A2A30',
+  borderLight: '#363640',
+};
+
+export const gradients = {
+  primary: ['#6C5CE7', '#8B7CF8'],
+  accent: ['#00D9A3', '#00B589'],
+  purpleGreen: ['#6C5CE7', '#00D9A3'],
+  dark: ['#1E1E24', '#16161A'],
+  glow: ['rgba(108,92,231,0.3)', 'rgba(108,92,231,0)'],
+  card: ['rgba(255,255,255,0.07)', 'rgba(255,255,255,0.02)'],
+};
