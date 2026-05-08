@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import { useApp } from '../context/AppContext';
-import { colors } from '../theme/colors';
+import { colors, gradients, radii, shadows, typography } from '../theme/colors';
 import GlowScoreRing from '../components/GlowScoreRing';
 import StatCard from '../components/StatCard';
 import XPBar from '../components/XPBar';
@@ -73,7 +73,7 @@ export default function HomeScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={['#C5A5FF', '#29D0A0']}
+              colors={gradients.primary}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.premiumGrad}
@@ -87,7 +87,7 @@ export default function HomeScreen() {
         {/* Streak Banner */}
         <Animated.View style={[styles.streakBanner, { opacity: headerFade }]}>
           <LinearGradient
-            colors={['rgba(255,255,255,0.96)', 'rgba(239,230,255,0.84)']}
+            colors={gradients.card}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.streakGrad}
@@ -112,7 +112,7 @@ export default function HomeScreen() {
           style={[styles.ringSection, { opacity: headerFade, transform: [{ translateY: contentSlide }] }]}
         >
           <LinearGradient
-            colors={['rgba(255,255,255,1)', 'rgba(244,237,255,0.86)']}
+            colors={gradients.card}
             style={styles.ringCard}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
@@ -184,7 +184,7 @@ export default function HomeScreen() {
               activeOpacity={0.85}
             >
               <LinearGradient
-                colors={['rgba(255,255,255,1)', 'rgba(248,244,252,0.92)']}
+                colors={gradients.card}
                 style={styles.challengeCard}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
@@ -211,7 +211,7 @@ export default function HomeScreen() {
           <GradientButton
             label="Start Today's Growth"
             icon="🚀"
-            gradient={[colors.primary, colors.accent]}
+            gradient={gradients.primary}
             onPress={() => navigation.navigate('Challenges')}
             style={styles.ctaBtn}
           />
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
   },
   header: {
     flexDirection: 'row',
@@ -249,21 +249,18 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   userName: {
-    fontSize: 27,
+    fontSize: 32,
+    lineHeight: 38,
     fontWeight: '800',
     color: colors.textPrimary,
-    letterSpacing: -0.5,
+    fontFamily: typography.headlineFamily,
     marginTop: 2,
   },
   premiumBtn: {
-    borderRadius: 22,
+    borderRadius: radii.pill,
     overflow: 'hidden',
     marginTop: 4,
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.22,
-    shadowRadius: 15,
-    elevation: 4,
+    ...shadows.glass,
   },
   premiumGrad: {
     flexDirection: 'row',
@@ -271,7 +268,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     gap: 4,
-    borderRadius: 20,
+    borderRadius: radii.pill,
   },
   premiumText: {
     color: '#fff',
@@ -280,16 +277,12 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   streakBanner: {
-    borderRadius: 22,
+    borderRadius: radii.lg,
     overflow: 'hidden',
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: colors.border,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.14,
-    shadowRadius: 20,
-    elevation: 3,
+    borderColor: 'rgba(231,224,234,0.72)',
+    ...shadows.glass,
   },
   streakGrad: {
     flexDirection: 'row',
@@ -297,7 +290,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    borderRadius: 22,
+    borderRadius: radii.lg,
   },
   streakMsg: {
     fontSize: 14,
@@ -310,8 +303,7 @@ const styles = StyleSheet.create({
   streakNum: {
     fontSize: 22,
     fontWeight: '800',
-    color: colors.primaryDark,
-    letterSpacing: -0.5,
+    color: colors.primary,
   },
   streakDay: {
     fontSize: 10,
@@ -325,21 +317,17 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   ringCard: {
-    borderRadius: 26,
+    borderRadius: radii.xl,
     alignItems: 'center',
     paddingTop: 26,
     paddingBottom: 24,
     paddingHorizontal: 20,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: 'rgba(231,224,234,0.72)',
     overflow: 'hidden',
     position: 'relative',
-    backgroundColor: colors.surface,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 16 },
-    shadowOpacity: 0.18,
-    shadowRadius: 24,
-    elevation: 5,
+    backgroundColor: colors.surfaceGlass,
+    ...shadows.lifted,
   },
   ringGlow: {
     position: 'absolute',
@@ -351,12 +339,9 @@ const styles = StyleSheet.create({
     opacity: 0.85,
   },
   sectionLabel: {
-    fontSize: 10,
-    fontWeight: '700',
+    ...typography.label,
     color: colors.textMuted,
-    letterSpacing: 1.5,
     marginBottom: 16,
-    textTransform: 'uppercase',
   },
   ringSubtitle: {
     fontSize: 13,
@@ -372,10 +357,11 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   sectionTitle: {
-    fontSize: 17,
+    fontSize: 24,
+    lineHeight: 30,
     fontWeight: '700',
     color: colors.textPrimary,
-    letterSpacing: -0.3,
+    fontFamily: typography.headlineFamily,
   },
   sectionLink: {
     fontSize: 13,
@@ -395,17 +381,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    borderRadius: 18,
+    borderRadius: radii.lg,
     borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
+    borderColor: 'rgba(231,224,234,0.72)',
+    backgroundColor: colors.surfaceGlass,
     gap: 12,
     overflow: 'hidden',
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.14,
-    shadowRadius: 18,
-    elevation: 3,
+    ...shadows.glass,
   },
   challengeIcon: {
     fontSize: 28,
@@ -427,10 +409,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryGlow,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    borderRadius: 10,
+    borderRadius: radii.pill,
   },
   xpPillText: {
-    color: colors.primaryLight,
+    color: colors.primary,
     fontSize: 12,
     fontWeight: '800',
   },

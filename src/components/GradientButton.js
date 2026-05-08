@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { TouchableOpacity, Text, StyleSheet, Animated, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from '../theme/colors';
+import { colors, radii, shadows } from '../theme/colors';
 
 export default function GradientButton({
   label,
@@ -52,7 +52,7 @@ export default function GradientButton({
           <Text style={[styles.label, isSmall && styles.labelSmall, textStyle]}>{label}</Text>
         </LinearGradient>
         {!disabled && (
-          <View style={[styles.glow, { backgroundColor: gradient[0] + '40' }]} />
+          <View style={[styles.glow, { backgroundColor: gradient[0] + '33' }]} />
         )}
       </TouchableOpacity>
     </Animated.View>
@@ -66,13 +66,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 16,
     paddingHorizontal: 28,
-    borderRadius: 16,
+    borderRadius: radii.pill,
     gap: 8,
+    ...shadows.glass,
   },
   btnSmall: {
     paddingVertical: 10,
     paddingHorizontal: 18,
-    borderRadius: 12,
+    borderRadius: radii.pill,
   },
   glow: {
     position: 'absolute',
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     left: 16,
     right: 16,
     height: 12,
-    borderRadius: 8,
+    borderRadius: radii.pill,
     opacity: 0.6,
   },
   label: {

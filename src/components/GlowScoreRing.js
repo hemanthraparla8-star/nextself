@@ -7,7 +7,7 @@ export default function GlowScoreRing({ score = 73, size = 200 }) {
   const [displayScore, setDisplayScore] = useState(0);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  const strokeWidth = 14;
+  const strokeWidth = 8;
   const radius = (size - strokeWidth * 2) / 2;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - score / 100);
@@ -51,8 +51,8 @@ export default function GlowScoreRing({ score = 73, size = 200 }) {
         <Svg width={size} height={size} style={styles.svg}>
           <Defs>
             <LinearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-              <Stop offset="0" stopColor={colors.primary} stopOpacity="1" />
-              <Stop offset="1" stopColor={colors.accent} stopOpacity="1" />
+              <Stop offset="0" stopColor={colors.secondary} stopOpacity="1" />
+              <Stop offset="1" stopColor={colors.primaryLight} stopOpacity="1" />
             </LinearGradient>
           </Defs>
           {/* Background track */}
@@ -110,17 +110,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   scoreNum: {
-    fontSize: 50,
+    fontSize: 52,
     fontWeight: '800',
     color: colors.textPrimary,
-    letterSpacing: -2,
     lineHeight: 56,
   },
   scoreLabel: {
     fontSize: 12,
     color: colors.textSecondary,
-    fontWeight: '500',
-    letterSpacing: 1,
+    fontWeight: '700',
+    letterSpacing: 1.4,
     textTransform: 'uppercase',
     marginTop: 2,
   },
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingHorizontal: 10,
     paddingVertical: 3,
-    borderRadius: 20,
+    borderRadius: 999,
     borderWidth: 1,
     borderColor: 'rgba(178,139,255,0.25)',
   },

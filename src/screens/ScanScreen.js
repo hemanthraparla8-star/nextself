@@ -18,7 +18,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
 import { useApp } from '../context/AppContext';
-import { colors } from '../theme/colors';
+import { colors, gradients, radii, shadows, typography } from '../theme/colors';
 import { analyzeGlowupScan } from '../services/glowupAnalysisService';
 import AIResultCard from '../components/AIResultCard';
 import GradientButton from '../components/GradientButton';
@@ -301,7 +301,7 @@ export default function ScanScreen() {
               <GradientButton
                 label="Analyze Now"
                 icon="✨"
-                gradient={[colors.primary, colors.accent]}
+                gradient={gradients.primary}
                 onPress={handleAnalyze}
                 style={styles.analyzeBtn}
               />
@@ -319,7 +319,7 @@ export default function ScanScreen() {
           >
             {/* Results Header */}
             <LinearGradient
-              colors={['rgba(0,217,163,0.12)', 'rgba(0,217,163,0.03)']}
+              colors={gradients.card}
               style={styles.resultsHeader}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   scrollContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
   },
   header: {
     flexDirection: 'row',
@@ -392,10 +392,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 26,
+    fontSize: 32,
+    lineHeight: 38,
     fontWeight: '800',
     color: colors.textPrimary,
-    letterSpacing: -0.5,
+    fontFamily: typography.headlineFamily,
   },
   subtitle: {
     fontSize: 13,
@@ -404,23 +405,18 @@ const styles = StyleSheet.create({
   },
   scansLeft: {
     alignItems: 'flex-end',
-    backgroundColor: colors.surface,
+    backgroundColor: colors.surfaceGlass,
     borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 16,
+    borderColor: 'rgba(231,224,234,0.72)',
+    borderRadius: radii.lg,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.14,
-    shadowRadius: 16,
-    elevation: 3,
+    ...shadows.glass,
   },
   scansNum: {
     fontSize: 18,
     fontWeight: '800',
     color: colors.primary,
-    letterSpacing: -0.5,
   },
   scansLabel: {
     fontSize: 9,
@@ -436,10 +432,10 @@ const styles = StyleSheet.create({
   modeTab: {
     paddingHorizontal: 14,
     paddingVertical: 7,
-    borderRadius: 18,
-    backgroundColor: colors.surface,
+    borderRadius: radii.pill,
+    backgroundColor: colors.surfaceGlass,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: colors.borderLight,
   },
   modeTabActive: {
     backgroundColor: colors.primaryGlow,
@@ -451,7 +447,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   modeTabTextActive: {
-    color: colors.primaryLight,
+    color: colors.primary,
     fontWeight: '700',
   },
   scanArea: {
@@ -459,22 +455,18 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   viewfinder: {
-    width: width - 80,
-    height: width - 80,
-    borderRadius: 28,
-    backgroundColor: colors.surface,
+    width: width - 48,
+    height: Math.min(width + 118, 520),
+    borderRadius: radii.xl,
+    backgroundColor: colors.surfaceGlass,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: 'rgba(231,224,234,0.72)',
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
     marginBottom: 20,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 18 },
-    shadowOpacity: 0.18,
-    shadowRadius: 26,
-    elevation: 5,
+    ...shadows.lifted,
   },
   previewImage: {
     ...StyleSheet.absoluteFillObject,
@@ -496,7 +488,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#F0E8FF',
+    backgroundColor: colors.primaryGlow,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 12,
@@ -550,7 +542,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   uploadedBadgeText: {
-    color: colors.textPrimary,
+    color: '#FFFFFF',
     fontSize: 12,
     fontWeight: '800',
   },
@@ -601,27 +593,19 @@ const styles = StyleSheet.create({
   },
   analyzeBtn: {
     width: '100%',
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.4,
-    shadowRadius: 16,
-    elevation: 8,
+    ...shadows.lifted,
   },
   resultsSection: {
     marginBottom: 16,
   },
   resultsHeader: {
-    borderRadius: 24,
+    borderRadius: radii.lg,
     padding: 20,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 14 },
-    shadowOpacity: 0.14,
-    shadowRadius: 20,
-    elevation: 4,
+    borderColor: 'rgba(231,224,234,0.72)',
+    backgroundColor: colors.surfaceGlass,
+    ...shadows.glass,
   },
   resultsTitle: {
     fontSize: 18,
@@ -647,7 +631,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '800',
     color: colors.accent,
-    letterSpacing: -0.5,
   },
   resultStatLabel: {
     fontSize: 10,
@@ -664,10 +647,10 @@ const styles = StyleSheet.create({
   disclaimer: {
     marginTop: 8,
     padding: 14,
-    backgroundColor: colors.surfaceLight,
-    borderRadius: 18,
+    backgroundColor: colors.surfaceGlass,
+    borderRadius: radii.lg,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: 'rgba(231,224,234,0.72)',
   },
   disclaimerText: {
     fontSize: 11,

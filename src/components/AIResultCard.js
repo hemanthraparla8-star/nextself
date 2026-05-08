@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from '../theme/colors';
+import { colors, gradients, radii, shadows } from '../theme/colors';
 
 export default function AIResultCard({ result, index = 0 }) {
   const { category, icon, color, tips } = result;
@@ -37,7 +37,7 @@ export default function AIResultCard({ result, index = 0 }) {
       ]}
     >
       <LinearGradient
-        colors={['rgba(255,255,255,1)', 'rgba(248,244,252,0.92)']}
+        colors={gradients.card}
         style={StyleSheet.absoluteFill}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -63,18 +63,14 @@ export default function AIResultCard({ result, index = 0 }) {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 20,
+    borderRadius: radii.lg,
     borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
+    borderColor: 'rgba(231,224,234,0.72)',
+    backgroundColor: colors.surfaceGlass,
     padding: 18,
     marginBottom: 12,
     overflow: 'hidden',
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.14,
-    shadowRadius: 18,
-    elevation: 3,
+    ...shadows.glass,
   },
   header: {
     flexDirection: 'row',
@@ -85,7 +81,7 @@ const styles = StyleSheet.create({
   iconWrap: {
     width: 42,
     height: 42,
-    borderRadius: 13,
+    borderRadius: radii.md,
     alignItems: 'center',
     justifyContent: 'center',
   },

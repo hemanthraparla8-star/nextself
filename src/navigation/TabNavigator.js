@@ -10,7 +10,7 @@ import ScanScreen from '../screens/ScanScreen';
 import SkincareScreen from '../screens/SkincareScreen';
 import ChallengesScreen from '../screens/ChallengesScreen';
 import ProgressScreen from '../screens/ProgressScreen';
-import { colors } from '../theme/colors';
+import { colors, radii, shadows } from '../theme/colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +28,6 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
   return (
     <View style={[styles.tabBarWrapper, { paddingBottom: insets.bottom || 12 }]}>
       <BlurView intensity={75} tint="light" style={StyleSheet.absoluteFill} />
-      <View style={styles.borderTop} />
       <View style={styles.tabBarInner}>
         {state.routes.map((route, index) => {
           const isFocused = state.index === index;
@@ -91,16 +90,20 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.86)',
-  },
-  borderTop: {
-    height: 1,
-    backgroundColor: colors.border,
+    marginHorizontal: 14,
+    marginBottom: 10,
+    borderRadius: radii.xl,
+    overflow: 'hidden',
+    backgroundColor: 'rgba(255, 255, 255, 0.88)',
+    borderWidth: 1,
+    borderColor: 'rgba(231,224,234,0.65)',
+    ...shadows.glass,
   },
   tabBarInner: {
     flexDirection: 'row',
-    paddingTop: 10,
-    paddingHorizontal: 4,
+    paddingTop: 9,
+    paddingHorizontal: 8,
+    paddingBottom: 7,
   },
   tabItem: {
     flex: 1,
@@ -109,28 +112,25 @@ const styles = StyleSheet.create({
   },
   activeIndicator: {
     position: 'absolute',
-    top: -10,
-    width: 32,
-    height: 3,
-    borderRadius: 2,
-    backgroundColor: colors.primary,
+    display: 'none',
   },
   iconWrap: {
     width: 40,
     height: 36,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 12,
+    borderRadius: radii.lg,
   },
   iconWrapActive: {
-    backgroundColor: '#EFE7FF',
+    backgroundColor: colors.primaryGlow,
   },
   tabLabel: {
     fontSize: 9,
     marginTop: 2,
     color: colors.textMuted,
-    fontWeight: '500',
-    letterSpacing: 0.3,
+    fontWeight: '700',
+    letterSpacing: 0.8,
+    textTransform: 'uppercase',
   },
   tabLabelActive: {
     color: colors.primary,

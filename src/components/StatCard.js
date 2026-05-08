@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from '../theme/colors';
+import { colors, gradients, radii, shadows } from '../theme/colors';
 
 export default function StatCard({ icon, label, value, unit, color = colors.primary, progress }) {
   const progressPercent = progress != null ? Math.min(progress, 1) : null;
@@ -9,7 +9,7 @@ export default function StatCard({ icon, label, value, unit, color = colors.prim
   return (
     <View style={styles.card}>
       <LinearGradient
-        colors={['rgba(255,255,255,1)', 'rgba(247,243,251,0.92)']}
+        colors={gradients.card}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -41,26 +41,22 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 5,
     padding: 16,
-    borderRadius: 20,
-    backgroundColor: colors.surface,
+    borderRadius: radii.lg,
+    backgroundColor: colors.surfaceGlass,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: 'rgba(231,224,234,0.72)',
     overflow: 'hidden',
     minHeight: 108,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.16,
-    shadowRadius: 18,
-    elevation: 4,
+    ...shadows.glass,
   },
   gradient: {
     ...StyleSheet.absoluteFillObject,
-    borderRadius: 20,
+    borderRadius: radii.lg,
   },
   iconWrap: {
     width: 34,
     height: 34,
-    borderRadius: 12,
+    borderRadius: radii.md,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
@@ -69,7 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   value: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '800',
     color: colors.textPrimary,
     letterSpacing: -0.5,
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     height: 3,
     borderRadius: 2,
-    backgroundColor: colors.border,
+    backgroundColor: colors.surfaceHighest,
     overflow: 'hidden',
   },
   progressFill: {
